@@ -1,0 +1,22 @@
+@value makerGrey200, makerGrey50 from '../../../common/colors.css';
+
+.contens_cotainer {
+}
+.contents {
+  margin: 4em auto;
+  display: flex;
+  flex-wrap: wrap;
+  border-left: 1px solid makerGrey200;
+}
+.text {
+  font-family: 'Gowun Batang', serif;
+  display: block;
+  width: 3em;
+  height: 3em;
+  text-align: center;
+  line-height: 3em;
+  border-top: 1px solid makerGrey200;
+  border-bottom: 1px solid makerGrey200;
+  border-right: 1px solid makerGrey200;
+  margin-bottom: 0.4em;
+}

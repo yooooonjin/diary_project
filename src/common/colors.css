@@ -1,0 +1,13 @@
+@value makerGrey600: #26282b;
+@value makerGrey500: #454C53;
+@value makerGrey400: #72787F;
+@value makerGrey300: #9EA4AA;
+@value makerGrey200: #C9CDD2;
+@value makerGrey100: #E8EBED;
+@value makerGrey50: #F7F8F9;
+
+@value makerShadow: rgba(217, 217, 217, 1);
+
+@value makerColorful: linear-gradient(166deg, rgba(237, 193, 211, 1) 0%,rgba(212, 149, 161, 1) 60%, rgba(162, 63, 63, 1) 100%, rgba(127, 188, 242, 1) 100%);
+
+@value makerWheat: wheat;
