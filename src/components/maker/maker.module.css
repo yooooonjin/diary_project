@@ -110,7 +110,7 @@
 .weather .weatherIcon {
   transition: all 200ms ease-in;
   color: makerGrey100;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 .weather input[type='radio']:checked + label .weatherIcon {
   color: makerGrey500;

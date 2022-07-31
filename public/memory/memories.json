@@ -12,7 +12,9 @@
       { "URL": "/images/seoulForest (1).jpg" },
       { "URL": "/images/seoulForest (2).jpg" },
       { "URL": "/images/seoulForest (3).jpg" },
-      { "URL": "/images/seoulForest (4).jpg" }
+      { "URL": "/images/seoulForest (4).jpg" },
+      { "URL": "/images/seoulForest (5).jpg" },
+      { "URL": "/images/seoulForest (6).jpg" }
     ]
   },
   "2022-07-16": {
@@ -25,10 +27,11 @@
     "compliment": "일찍일어남",
     "regret": "폭식함",
     "pictures": [
-      { "URL": "/images/seoulForest (11).jpg" },
-      { "URL": "/images/seoulForest (2).jpg" },
-      { "URL": "/images/seoulForest (3).jpg" },
-      { "URL": "/images/seoulForest (4).jpg" }
+      { "URL": "/images/oneMount (1).jpg" },
+      { "URL": "/images/oneMount (2).jpg" },
+      { "URL": "/images/oneMount (3).jpg" },
+      { "URL": "/images/oneMount (4).jpg" },
+      { "URL": "/images/oneMount (5).jpg" }
     ]
   }
 }

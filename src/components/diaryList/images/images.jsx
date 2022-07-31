@@ -13,14 +13,13 @@ const Images = ({ memories, days, onImageClick }) => {
   });
 
   return (
-    <div className={styles.images} onClick={onImageClick}>
-      {URL && (
-        <img
-          data-date={days.format('YYYY-MM-DD')}
-          className={styles.image}
-          src={`${URL}`}
-        />
-      )}
+    <div
+      className={styles.images}
+      onClick={() => {
+        onImageClick(days.format('YYYY-MM-DD'));
+      }}
+    >
+      {URL && <img className={styles.image} src={`${URL}`} />}
       <div className={`${styles.day} ${URL && styles.white}`}>
         {days.format('DD')}
       </div>

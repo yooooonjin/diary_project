@@ -5,19 +5,22 @@ import styles from './diaryList.module.css';
 
 const DiaryList = ({ getMemoryList }) => {
   const [memories, setMemories] = useState({});
+  const [emptyMemory, setEmptyMemory] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
     async function getMemory() {
       const data = await getMemoryList.getMemories();
+      const emptyData = await getMemoryList.getEmptyMemory();
       setMemories(data);
+      setEmptyMemory(emptyData);
     }
     getMemory();
   });
 
-  const onImageClick = () => {
-    console.log('맞나?');
-    navigate('/memory');
+  const onImageClick = (day) => {
+    const memory = memories[day];
+    navigate('/memory', { state: { memory, day, emptyMemory } });
   };
 
   return (

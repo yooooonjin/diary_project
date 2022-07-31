@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './diary.module.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +13,7 @@ import {
 import Pictures from './pictures/pictures';
 import Content from './content/content';
 
-const Diary = ({ memories }) => {
+const Diary = ({ memory, newMemory, day }) => {
   const {
     id,
     date,
@@ -24,7 +24,7 @@ const Diary = ({ memories }) => {
     compliment,
     regret,
     pictures,
-  } = memories[0];
+  } = memory ? memory : newMemory;
 
   const diaryRef = useRef();
   const stopMotionByWheel = (element) => {
@@ -41,7 +41,7 @@ const Diary = ({ memories }) => {
       <article className={styles.container}>
         <div>
           <div className={styles.info}>
-            <p className={styles.date}>{date}</p>
+            <p className={styles.date}>{day}</p>
             <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
             <span className={styles.place}>{location}</span>
           </div>

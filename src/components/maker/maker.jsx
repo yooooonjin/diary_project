@@ -9,7 +9,8 @@ import {
   faSnowflake,
 } from '@fortawesome/free-solid-svg-icons';
 
-const Maker = ({ memories, updateContent, isvisible }) => {
+const Maker = ({ memory, newMemory, updateContent, isvisible, day }) => {
+  const makerTarget = memory ? memory : newMemory;
   const {
     id,
     date,
@@ -20,11 +21,13 @@ const Maker = ({ memories, updateContent, isvisible }) => {
     compliment,
     regret,
     pictures,
-  } = memories[0];
+  } = makerTarget;
+
   const handleUpdate = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    updateContent(name, value, id);
+    const newData = {
+      [day]: { ...makerTarget, [event.target.name]: event.target.value },
+    };
+    updateContent(newData, day);
   };
   return (
     <>
@@ -32,7 +35,6 @@ const Maker = ({ memories, updateContent, isvisible }) => {
         className={`${styles.container} ${!isvisible && styles.invisible}`}
       >
         <div className={`${styles.maker} ${!isvisible && styles.invisible}`}>
-          {/* <h1 className={styles.makerTitle}>My today is...</h1> */}
           <form className={styles.form} action=''>
             <div className={styles.subtitle}>오늘의 일기</div>
             <div className={styles.rowContent}>
@@ -43,7 +45,7 @@ const Maker = ({ memories, updateContent, isvisible }) => {
                   type='date'
                   name='date'
                   id='date'
-                  value={date}
+                  value={day}
                   onChange={handleUpdate}
                 />
               </div>
@@ -54,7 +56,7 @@ const Maker = ({ memories, updateContent, isvisible }) => {
                   name='weather'
                   id='sun'
                   value='sun'
-                  defaultChecked='checked'
+                  checked={weather === 'sun'}
                   onChange={handleUpdate}
                 />
                 <label htmlFor='sun'>
@@ -69,6 +71,7 @@ const Maker = ({ memories, updateContent, isvisible }) => {
                   name='weather'
                   id='cloudSun'
                   value='cloudSun'
+                  checked={weather === 'cloudSun'}
                   onChange={handleUpdate}
                 />
                 <label htmlFor='cloudSun'>
@@ -83,6 +86,7 @@ const Maker = ({ memories, updateContent, isvisible }) => {
                   name='weather'
                   id='cloud'
                   value='cloud'
+                  checked={weather === 'cloud'}
                   onChange={handleUpdate}
                 />
                 <label htmlFor='cloud'>
@@ -97,6 +101,7 @@ const Maker = ({ memories, updateContent, isvisible }) => {
                   name='weather'
                   id='rain'
                   value='rain'
+                  checked={weather === 'rain'}
                   onChange={handleUpdate}
                 />
                 <label htmlFor='rain'>
@@ -111,6 +116,7 @@ const Maker = ({ memories, updateContent, isvisible }) => {
                   name='weather'
                   id='snow'
                   value='snow'
+                  checked={weather === 'snow'}
                   onChange={handleUpdate}
                 />
                 <label htmlFor='snow'>

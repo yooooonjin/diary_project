@@ -9,11 +9,8 @@ const Pictures = ({ images, stopMotionByWheel }) => {
   const PHOTO_WIDTH = 20;
   const [active, setActive] = useState(0);
   const count = images.length;
-  const picturesRef = useRef();
-  const pictureRef = useRef();
 
   const handleWheel = (event) => {
-    const picturesRect = picturesRef.current.getBoundingClientRect();
     if (event.deltaY > 0 && active < count - 1) {
       setActive((i) => i + 1);
     } else if (event.deltaY < 0 && active > 0) {
@@ -33,12 +30,8 @@ const Pictures = ({ images, stopMotionByWheel }) => {
             <FontAwesomeIcon icon={faAngleLeft} className={styles.icon} />
           </button>
         )}
-        <div
-          ref={picturesRef}
-          className={styles.pictures_container}
-          onWheel={handleWheel}
-        >
-          <div ref={pictureRef} className={styles.pictures}>
+        <div className={styles.pictures_container} onWheel={handleWheel}>
+          <div className={styles.pictures}>
             {images.map((image, idx) => (
               <Photo
                 key={idx}
@@ -59,12 +52,14 @@ const Pictures = ({ images, stopMotionByWheel }) => {
           </button>
         )}
       </div>
-      <div className={styles.progressBar}>
-        <div
-          className={styles.progress}
-          style={{ width: `${(100 / count) * (active + 1)}%` }}
-        ></div>
-      </div>
+      {count > 2 && (
+        <div className={styles.progressBar}>
+          <div
+            className={styles.progress}
+            style={{ width: `${(100 / count) * (active + 1)}%` }}
+          ></div>
+        </div>
+      )}
     </>
   );
 };
