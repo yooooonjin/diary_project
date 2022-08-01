@@ -13,7 +13,7 @@ import {
 import Pictures from './pictures/pictures';
 import Content from './content/content';
 
-const Diary = ({ memory, newMemory, day }) => {
+const Diary = ({ memory, day }) => {
   const {
     id,
     date,
@@ -24,7 +24,7 @@ const Diary = ({ memory, newMemory, day }) => {
     compliment,
     regret,
     pictures,
-  } = memory ? memory : newMemory;
+  } = memory || {};
 
   const diaryRef = useRef();
   const stopMotionByWheel = (element) => {
@@ -43,9 +43,9 @@ const Diary = ({ memory, newMemory, day }) => {
           <div className={styles.info}>
             <p className={styles.date}>{day}</p>
             <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
-            <span className={styles.place}>{location}</span>
+            <span className={styles.place}>{location || '장소'}</span>
           </div>
-          <p className={styles.title}>{title}</p>
+          <p className={styles.title}>{title || '제목을 입력해주세요.'}</p>
         </div>
         <div>
           {

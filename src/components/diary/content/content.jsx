@@ -2,7 +2,8 @@ import React from 'react';
 import styles from './content.module.css';
 
 const Content = ({ contents }) => {
-  const letters = contents.split('');
+  const diaryContents = contents || '일기를 작성해 주세요:)';
+  const letters = diaryContents && diaryContents.split('');
   return (
     <div className={styles.contens_cotainer}>
       <ul className={styles.contents}>

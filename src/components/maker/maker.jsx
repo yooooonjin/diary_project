@@ -1,16 +1,9 @@
 import React, { useRef } from 'react';
+import ImageUpload from './imageUpload/imageUpload';
 import styles from './maker.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faSun,
-  faCloudSun,
-  faCloud,
-  faUmbrella,
-  faSnowflake,
-} from '@fortawesome/free-solid-svg-icons';
+import Weather from './weather/weather';
 
-const Maker = ({ memory, newMemory, updateContent, isvisible, day }) => {
-  const makerTarget = memory ? memory : newMemory;
+const Maker = ({ memory, updateContent, isvisible, day, fileUpload }) => {
   const {
     id,
     date,
@@ -21,13 +14,20 @@ const Maker = ({ memory, newMemory, updateContent, isvisible, day }) => {
     compliment,
     regret,
     pictures,
-  } = makerTarget;
+  } = memory || {};
 
-  const handleUpdate = (event) => {
-    const newData = {
-      [day]: { ...makerTarget, [event.target.name]: event.target.value },
-    };
-    updateContent(newData, day);
+  const onChange = (event) => {
+    const newData = { ...memory, [event.target.name]: event.target.value };
+    updateContent(newData);
+  };
+
+  const onFileChange = (files) => {
+    const filesURL = [];
+    for (const file of files) {
+      filesURL.push(file.url);
+    }
+    const newData = { ...memory, pictures: filesURL };
+    updateContent(newData);
   };
   return (
     <>
@@ -46,85 +46,12 @@ const Maker = ({ memory, newMemory, updateContent, isvisible, day }) => {
                   name='date'
                   id='date'
                   value={day}
-                  onChange={handleUpdate}
+                  readOnly
+                  onChange={onChange}
                 />
               </div>
               <div className={`${styles.column} ${styles.weather}`}>
-                <input
-                  className={`${styles.input}`}
-                  type='radio'
-                  name='weather'
-                  id='sun'
-                  value='sun'
-                  checked={weather === 'sun'}
-                  onChange={handleUpdate}
-                />
-                <label htmlFor='sun'>
-                  <FontAwesomeIcon
-                    icon={faSun}
-                    className={styles.weatherIcon}
-                  />
-                </label>
-                <input
-                  className={`${styles.input}`}
-                  type='radio'
-                  name='weather'
-                  id='cloudSun'
-                  value='cloudSun'
-                  checked={weather === 'cloudSun'}
-                  onChange={handleUpdate}
-                />
-                <label htmlFor='cloudSun'>
-                  <FontAwesomeIcon
-                    icon={faCloudSun}
-                    className={styles.weatherIcon}
-                  />
-                </label>
-                <input
-                  className={`${styles.input}`}
-                  type='radio'
-                  name='weather'
-                  id='cloud'
-                  value='cloud'
-                  checked={weather === 'cloud'}
-                  onChange={handleUpdate}
-                />
-                <label htmlFor='cloud'>
-                  <FontAwesomeIcon
-                    icon={faCloud}
-                    className={styles.weatherIcon}
-                  />
-                </label>
-                <input
-                  className={`${styles.input}`}
-                  type='radio'
-                  name='weather'
-                  id='rain'
-                  value='rain'
-                  checked={weather === 'rain'}
-                  onChange={handleUpdate}
-                />
-                <label htmlFor='rain'>
-                  <FontAwesomeIcon
-                    icon={faUmbrella}
-                    className={styles.weatherIcon}
-                  />
-                </label>
-                <input
-                  className={`${styles.input}`}
-                  type='radio'
-                  name='weather'
-                  id='snow'
-                  value='snow'
-                  checked={weather === 'snow'}
-                  onChange={handleUpdate}
-                />
-                <label htmlFor='snow'>
-                  <FontAwesomeIcon
-                    icon={faSnowflake}
-                    className={styles.weatherIcon}
-                  />
-                </label>
+                <Weather weather={weather} onChange={onChange} />
               </div>
             </div>
             <div className={`${styles.column} ${styles.row}`}>
@@ -135,7 +62,8 @@ const Maker = ({ memory, newMemory, updateContent, isvisible, day }) => {
                 name='location'
                 id='location'
                 value={location}
-                onChange={handleUpdate}
+                placeholder='장소를 입력해주세요.'
+                onChange={onChange}
               />
             </div>
             <div className={`${styles.column} ${styles.row}`}>
@@ -146,7 +74,8 @@ const Maker = ({ memory, newMemory, updateContent, isvisible, day }) => {
                 name='title'
                 id='title'
                 value={title}
-                onChange={handleUpdate}
+                placeholder='제목을 입력해주세요.'
+                onChange={onChange}
               />
             </div>
             <textarea
@@ -154,19 +83,21 @@ const Maker = ({ memory, newMemory, updateContent, isvisible, day }) => {
               name='contents'
               id='contents'
               value={contents}
-              onChange={handleUpdate}
+              placeholder='일기를 작성해 주세요:)'
+              onChange={onChange}
               spellCheck='false'
             ></textarea>
             <div className={styles.rowContent}>
               <div className={styles.column}>
-                <p>오늘 잘한 일</p>
+                <p>오늘의 칭찬</p>
                 <textarea
                   type='text'
                   className={styles.textarea}
                   name='compliment'
                   id='compliment'
                   value={compliment}
-                  onChange={handleUpdate}
+                  placeholder='오늘 잘한일은?'
+                  onChange={onChange}
                 />
               </div>
               <div className={styles.column}>
@@ -177,16 +108,15 @@ const Maker = ({ memory, newMemory, updateContent, isvisible, day }) => {
                   name='regret'
                   id='regret'
                   value={regret}
-                  onChange={handleUpdate}
+                  placeholder='오늘 반성 할 일은?'
+                  onChange={onChange}
                 />
               </div>
             </div>
-            <div className={`${styles.column} ${styles.row}`}>
-              <input
-                type='text'
-                name='photo'
-                id='photo'
-                className={styles.input}
+            <div className={`${styles.column} ${styles.fileUpload} `}>
+              <ImageUpload
+                fileUpload={fileUpload}
+                onFileChange={onFileChange}
               />
             </div>
           </form>

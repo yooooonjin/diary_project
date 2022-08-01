@@ -2,58 +2,16 @@ import React, { useState } from 'react';
 import styles from './calendar.module.css';
 import moment, { months } from 'moment';
 import Images from '../images/images';
+import CalendarFrame from './calendarFrame/calendarFrame';
+import { useNavigate } from 'react-router-dom';
 
-const Calendar = ({ memories, onImageClick }) => {
+const Calendar = ({ memories, user }) => {
   const [getMoment, setMoment] = useState(moment());
   const today = getMoment;
-  const firstWeek = today.clone().startOf('month').week();
-  const lastWeek =
-    today.clone().endOf('month').week() === 1
-      ? 53
-      : today.clone().endOf('month').week();
+  const navigate = useNavigate();
 
-  const calendarArr = () => {
-    const result = [];
-    const week = firstWeek;
-    for (let i = week; i <= lastWeek; i++) {
-      result.push(
-        <tr key={i}>
-          {Array(7)
-            .fill(0)
-            .map((_, index) => {
-              const days = today
-                .clone()
-                .startOf('year')
-                .week(i)
-                .startOf('week')
-                .add(index, 'day');
-
-              return (
-                <td
-                  className={`${styles.td} ${
-                    moment().format('YYYYMMDD') === days.format('YYYYMMDD') &&
-                    styles.today
-                  }
-                    ${
-                      days.format('MM') !== today.format('MM') &&
-                      styles.disabled
-                    }`}
-                  key={index}
-                >
-                  <Images
-                    key={index}
-                    memories={memories}
-                    days={days}
-                    onImageClick={onImageClick}
-                  />
-                </td>
-              );
-            })}
-        </tr>
-      );
-    }
-
-    return result;
+  const onImageClick = (day) => {
+    navigate('/memory', { state: { memories, day, user } });
   };
 
   return (
@@ -77,9 +35,11 @@ const Calendar = ({ memories, onImageClick }) => {
           다음달
         </button>
       </div>
-      <table className={styles.table}>
-        <tbody className={styles.tbody}>{calendarArr()}</tbody>
-      </table>
+      <CalendarFrame
+        today={today}
+        onImageClick={onImageClick}
+        memories={memories}
+      />
     </div>
   );
 };

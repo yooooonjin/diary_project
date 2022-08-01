@@ -5,11 +5,12 @@ const Images = ({ memories, days, onImageClick }) => {
   const [URL, setURL] = useState();
 
   useEffect(() => {
-    Object.keys(memories).map((key) => {
-      if (key === days.format('YYYY-MM-DD')) {
-        setURL(memories[key].pictures[0].URL);
-      }
-    });
+    memories &&
+      Object.keys(memories).map((key) => {
+        if (key === days.format('YYYY-MM-DD')) {
+          memories[key].pictures && setURL(memories[key].pictures[0]);
+        }
+      });
   });
 
   return (

@@ -1,0 +1,23 @@
+@value makerGrey500, makerGrey50 from '../../common/colors.css';
+
+.login_cotainer {
+  margin: 5em auto;
+  padding: 5em;
+  width: 50%;
+  height: 30em;
+  background-color: makerGrey50;
+  text-align: center;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.input {
+  display: inline-block;
+  margin-bottom: 2em;
+}
+.Btn {
+  cursor: pointer;
+}

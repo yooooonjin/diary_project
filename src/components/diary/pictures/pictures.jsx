@@ -6,9 +6,8 @@ import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import Photo from '../photo/photo';
 
 const Pictures = ({ images, stopMotionByWheel }) => {
-  const PHOTO_WIDTH = 20;
   const [active, setActive] = useState(0);
-  const count = images.length;
+  const count = images && images.length;
 
   const handleWheel = (event) => {
     if (event.deltaY > 0 && active < count - 1) {
@@ -32,15 +31,13 @@ const Pictures = ({ images, stopMotionByWheel }) => {
         )}
         <div className={styles.pictures_container} onWheel={handleWheel}>
           <div className={styles.pictures}>
-            {images.map((image, idx) => (
-              <Photo
-                key={idx}
-                URL={image.URL}
-                active={active}
-                idx={idx}
-                width={PHOTO_WIDTH}
-              />
-            ))}
+            {images &&
+              images.map((image, idx) => (
+                <Photo key={idx} URL={image} active={active} idx={idx} />
+              ))}
+            {!images && (
+              <Photo URL={'/images/not-available.png'} active={0} idx={0} />
+            )}
           </div>
         </div>
         {active < count - 1 && (

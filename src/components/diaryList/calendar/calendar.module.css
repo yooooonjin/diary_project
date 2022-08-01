@@ -19,15 +19,3 @@
   font-size: 0.8em;
   cursor: pointer;
 }
-.table {
-  margin: 3em auto;
-}
-.td {
-  padding: 0.4em;
-}
-.today {
-  color: reds;
-}
-.disabled {
-  opacity: 0;
-}

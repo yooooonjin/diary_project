@@ -1,1 +1,5 @@
 @value makerGrey500, makerGrey50 from '../../common/colors.css';
+
+.diaryList {
+  text-align: center;
+}

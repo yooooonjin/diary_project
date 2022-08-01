@@ -7,12 +7,14 @@ import Maker from '../maker/maker';
 import Diary from '../diary/diary';
 import { useLocation } from 'react-router-dom';
 
-const Memory = () => {
+const Memory = ({ diaryRepository, fileUpload }) => {
   const location = useLocation();
   const locationState = location?.state;
 
-  const [memory, setMemory] = useState(locationState && locationState.memory);
-  const [newMemory, setNewMemory] = useState(locationState.emptyMemory);
+  const [memories, setMemories] = useState(
+    locationState && locationState.memories
+  );
+  const [user, setUser] = useState(locationState.user);
 
   const [isvisible, setIsvisible] = useState(true);
 
@@ -20,11 +22,12 @@ const Memory = () => {
     isvisible ? setIsvisible(false) : setIsvisible(true);
   };
 
-  const onUpdate = (data, day) => {
-    setMemory(() => {
-      const newMemory = data[day];
+  const onUpdate = (data) => {
+    setMemories((memories) => {
+      const newMemory = { ...memories, [locationState.day]: data };
       return newMemory;
     });
+    diaryRepository.saveDiary(user.id, data, locationState.day);
   };
   return (
     <section className={styles.container}>
@@ -35,15 +38,18 @@ const Memory = () => {
           onClick={onArrowBtnClick}
         />
         <Maker
-          memory={memory}
-          newMemory={newMemory}
+          memory={memories && memories[locationState.day]}
           updateContent={onUpdate}
           isvisible={isvisible}
           day={locationState.day}
+          fileUpload={fileUpload}
         />
       </div>
       <div className={styles.diary}>
-        <Diary memory={memory} newMemory={newMemory} day={locationState.day} />
+        <Diary
+          memory={memories && memories[locationState.day]}
+          day={locationState.day}
+        />
       </div>
     </section>
   );
