@@ -1,0 +1,20 @@
+@value makerDark from '../../common/colors.css';
+
+input[type='radio'] {
+  display: none;
+}
+label {
+  cursor: pointer;
+  margin: 0.3em;
+}
+.weatherIcon:hover {
+  transform: scale(1.1);
+}
+.weatherIcon {
+  transition: all 200ms ease-in;
+  color: #e9e5ce;
+  font-size: 1.2em;
+}
+input[type='radio']:checked + label .weatherIcon {
+  color: makerDark;
+}

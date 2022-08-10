@@ -1,0 +1,30 @@
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+
+.ourTodayDiary {
+  display: flex;
+  height: 100vh;
+}
+.ourDiary {
+  width: 70%;
+  max-width: maxWidth;
+  min-width: minWidth;
+  margin: auto;
+  max-width: 60em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .ourTodayDiary {
+    padding: 0 1em;
+  }
+  .ourDiary {
+    min-width: 23.5em;
+    width: 100%;
+  }
+  .hide {
+    display: none;
+  }
+}

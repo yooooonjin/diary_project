@@ -1,0 +1,23 @@
+@value makerBlack,makerDarkBeige,makerDark,makerBeige from '../../common/colors.css';
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+
+.moreViewModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 30;
+
+  background-color: makerDark;
+  border: 3px solid makerDark;
+  color: makerDark;
+}
+.noPicture {
+  font-size: 1.5rem;
+  height: 100%;
+  margin-top: 45vh;
+  color: makerBlack;
+  text-align: center;
+}

@@ -1,0 +1,28 @@
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+
+.todayDiary {
+  display: flex;
+  height: 100vh;
+}
+.diaryWrap {
+  width: 70%;
+  margin: auto;
+  max-width: maxWidth;
+  min-width: minWidth;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .todayDiary {
+    padding: 0 1em;
+  }
+  .diaryWrap {
+    min-width: 23.5em;
+    width: 100%;
+  }
+  .hide {
+    display: none;
+  }
+}

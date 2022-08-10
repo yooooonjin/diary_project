@@ -1,0 +1,16 @@
+@value makerPink,makerGrey500, makerGrey50 from '../../common/colors.css';
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+
+.record {
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .record {
+    padding: 0 1em;
+  }
+}

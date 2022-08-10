@@ -1,54 +1,156 @@
-@value makerGrey500,makerGrey400,makerGrey100, makerGrey50 from '../../common/colors.css';
+@value makerDarkBeige,makerBeige,makerDark from '../../common/colors.css';
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
 
 .diary {
-  overflow-y: scroll;
   overflow-x: hidden;
+  background-color: makerBeige;
+  border: 3px solid makerDark;
+  border-radius: 2em;
+  box-shadow: 6px 6px 0px 0px makerDark;
+  color: makerDark;
 }
-.diary::-webkit-scrollbar {
-  display: none;
-}
-.diary.stop {
-  overflow: hidden;
-}
-.container {
+.diary_mark {
+  position: relative;
+  padding: 0.4em 1em;
+  border-bottom: 3px solid makerDark;
   display: flex;
-  justify-content: space-between;
+  background-color: makerDarkBeige;
+  border-radius: 2em 2em 0 0;
+  justify-content: center;
+  align-items: center;
 }
 .info {
-  margin-top: 4em;
   display: flex;
   align-items: center;
 }
 .date {
   font-size: 1.3rem;
   font-weight: 500;
-  /* font-family: 'Ibarra Real Nova', serif; */
-  font-family: 'Gowun Batang', serif;
-  color: makerGrey500;
 }
-.icon {
+.placeIcon {
   padding-left: 1em;
   font-size: 0.8em;
-  color: makerGrey500;
 }
 .place {
   padding-left: 0.2em;
   font-size: 0.8rem;
-  color: makerGrey500;
-}
-.title {
-  font-family: 'Gowun Batang', serif;
-  font-weight: 700;
-  font-size: 1.5rem;
-  margin: 0 0 1.3em;
-  color: makerGrey500;
 }
 .weather {
-  margin: 2em 1em;
+  position: absolute;
+  top: 0.3em;
+  right: 0.7em;
   font-size: 1.7rem;
-  color: makerGrey500;
   transition: all 300ms linear;
 }
 .weather:hover {
-  transform: scale(1.2) rotate(5deg);
+  transform: scale(1.1);
+}
+
+/* ////////////////////////////////////////// */
+.mainDiary_container {
+  padding: 2.5em;
+  height: 70vh;
+  max-height: 34em;
+}
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 0 0 1em;
+}
+.mainDiary {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+.diary.single {
+  display: block;
+}
+.pictures {
+  height: 100%;
+  margin-right: 2em;
+  text-align: center;
+}
+.image {
+  border: 2px solid makerDark;
+  max-width: 25em;
+  height: 100%;
+  object-fit: contain;
+}
+.contentsBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.evaluation_container {
+  display: flex;
+  justify-content: space-around;
+  border-top: 2px solid makerDark;
+  border-left: 2px solid makerDark;
+}
+.evaluation {
+  cursor: pointer;
+  padding: 0.2em 0;
+  text-align: center;
+  flex: 1;
+  border-right: 2px solid makerDark;
+}
+.evaluation:hover {
+  background-color: makerDarkBeige;
+}
+.evaluation.selected {
+  background-color: makerDark;
+  color: white;
+}
+.written {
+  overflow-y: scroll;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: 2px solid makerDark;
+  padding: 1em;
+}
+
+.button_container {
+  margin-top: 2em;
+  display: flex;
+  margin-left: auto;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .diary {
+    min-width: 23.5em;
+    width: 100%;
+  }
+  .wrap {
+    flex-direction: column;
+  }
+  .mainDiary_container {
+    padding: 1em;
+    height: 70vh;
+    max-height: 34em;
+  }
+  .title {
+    font-size: 1.2rem;
+    margin: 0 0 0.5em;
+  }
+  .button_container {
+    margin-top: 1em;
+  }
+  .date {
+    font-size: 1.2rem;
+  }
+  .pictures {
+    display: none;
+  }
+  .evaluation {
+    font-size: 0.8rem;
+  }
 }

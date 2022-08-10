@@ -1,28 +1,56 @@
 import React from 'react';
 import './app.module.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Memory from './components/memory/memory';
-import DiaryList from './components/diaryList/diaryList';
-import Login from './components/login/login';
+import Login from './page/login/login';
+import OurRecord from './page/ourRecord/ourRecord';
+import Record from './page/record/record';
+import TodayDiary from './page/todayDiary/todayDiary';
+import OurTodayDiary from './page/ourTodayDiary/ourTodayDiary';
 
-function App({ getMemoryList, auth, diaryRepository, fileUpload }) {
+function App({ auth, diaryRepository, userRepository, fileUpload }) {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Login auth={auth} />} />
         <Route
-          path='/diary'
+          path='/'
+          element={<Login auth={auth} userRepository={userRepository} />}
+        />
+        <Route
+          path='/record'
           element={
-            <DiaryList
-              getMemoryList={getMemoryList}
+            <Record
               diaryRepository={diaryRepository}
+              userRepository={userRepository}
+              auth={auth}
             />
           }
         />
         <Route
-          path='/memory'
+          path='/todayDiary'
           element={
-            <Memory diaryRepository={diaryRepository} fileUpload={fileUpload} />
+            <TodayDiary
+              diaryRepository={diaryRepository}
+              fileUpload={fileUpload}
+            />
+          }
+        />
+        <Route
+          path='/ours'
+          element={
+            <OurRecord
+              diaryRepository={diaryRepository}
+              userRepository={userRepository}
+              auth={auth}
+            />
+          }
+        />
+        <Route
+          path='/ourMemory'
+          element={
+            <OurTodayDiary
+              diaryRepository={diaryRepository}
+              fileUpload={fileUpload}
+            />
           }
         />
       </Routes>

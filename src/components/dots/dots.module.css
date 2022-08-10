@@ -1,0 +1,26 @@
+@value makerDark from '../../common/colors.css';
+@value mediaQuery from '../../common/size.css';
+
+.dots {
+  position: absolute;
+  display: flex;
+  margin-right: auto;
+  left: 2em;
+}
+.dot {
+  margin-right: 0.8em;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 2px solid makerDark;
+  background-color: transparent;
+  box-shadow: 1px 1px 0px 0px makerDark;
+}
+.dot:first-child {
+  background-color: makerDark;
+}
+@media screen and (max-width: mediaQuery) {
+  .dots {
+    display: none;
+  }
+}

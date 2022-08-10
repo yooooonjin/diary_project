@@ -1,0 +1,46 @@
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+
+.icon_container {
+  text-align: center;
+  position: fixed;
+  top: 2em;
+}
+.icon_container.leftSide {
+  left: 2em;
+}
+.icon_container.rigthSide {
+  right: 2em;
+  flex-wrap: wrap;
+}
+.icon_container > div {
+  cursor: pointer;
+}
+.icon_container > div:hover .icon {
+  transform: scale(1.05);
+}
+.icon {
+  width: 5.5em;
+  height: 5.5em;
+}
+.iconName {
+  margin-bottom: 1em;
+  font-size: 0.8em;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .icon_container {
+    display: flex;
+  }
+  .icon_container.rigthSide {
+    left: 2em;
+    top: auto;
+    bottom: 2em;
+  }
+  .iconPiece {
+    margin-right: 1em;
+  }
+  .icon {
+    width: 4.2em;
+    height: 4.2em;
+  }
+}

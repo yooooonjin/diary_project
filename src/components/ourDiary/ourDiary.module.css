@@ -1,0 +1,158 @@
+@value makerLightPink,makerDarkBeige,makerBeige,makerDark from '../../common/colors.css';
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+
+.folder {
+  overflow-x: hidden;
+  background-color: makerBeige;
+  border: 3px solid makerDark;
+  border-radius: 2em;
+  box-shadow: 6px 6px 0px 0px makerDark;
+  color: makerDark;
+}
+.folder_mark {
+  position: relative;
+  padding: 0.4em 1em;
+  border-bottom: 3px solid makerDark;
+  display: flex;
+  background-color: makerDarkBeige;
+  border-radius: 2em 2em 0 0;
+  justify-content: center;
+  align-items: center;
+}
+.folder::-webkit-scrollbar {
+  display: none;
+}
+.folder.stop {
+  overflow: hidden;
+}
+.info {
+  display: flex;
+  align-items: center;
+}
+.date {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+/* ///////////////////////////////////////////// */
+.diary_container {
+  height: 70vh;
+  max-height: 34em;
+}
+.diary {
+  display: flex;
+  height: 100%;
+}
+.noteBox {
+  flex: 30%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3em 0 3em 3em;
+  margin-bottom: auto;
+}
+.noteFile {
+  width: 4em;
+  margin: 0 1em;
+  transition: all 100ms ease-in;
+  text-align: center;
+  cursor: pointer;
+}
+.noteFile:hover .noteFileImg {
+  transform: rotate(5deg);
+}
+.noteFileDesc {
+  font-size: 0.8rem;
+  margin: 0.5em 0 1.5em;
+}
+.friendDiaryBox {
+  flex: 80%;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+}
+.morePictures {
+  width: 100%;
+  text-align: center;
+  background-color: makerDark;
+  color: makerBeige;
+  font-size: 0.7rem;
+  padding: 0.4em 0 0.2em;
+  cursor: pointer;
+}
+.friendDiary {
+  flex: 1;
+  border: 2px solid makerDark;
+  border-bottom: none;
+  background-color: white;
+  padding: 2em;
+  overflow-y: scroll;
+}
+.commentBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fee3e2;
+  border-left: 2px solid makerDark;
+  border-right: 2px solid makerDark;
+  padding: 0.5em 1em;
+  font-size: 0.9rem;
+}
+.comment {
+  height: 2.5em;
+  text-align: center;
+  display: flex;
+  border: 2px solid makerDark;
+}
+.commentText {
+  padding: 0 0.7em;
+}
+.arrow {
+  color: makerDark;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+.commentInput {
+  width: 100%;
+  padding: 0 1em;
+  outline: none;
+  border: none;
+}
+.commentBtn {
+  width: 15%;
+  background-color: makerDark;
+  color: makerBeige;
+}
+.emptyContent {
+  font-size: 1.2rem;
+  color: #e4d8be;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .diary {
+    display: flex;
+    flex-direction: column;
+  }
+  .date {
+    font-size: 1.2rem;
+  }
+  .noteBox {
+    padding: 1.5em 1em 0em 1em;
+    overflow-x: scroll;
+  }
+  .noteFile {
+    width: 3em;
+    margin-right: 0.5em;
+  }
+  .noteFileDesc {
+    margin: 0;
+    font-size: 0.7rem;
+  }
+  .friendDiaryBox {
+    height: 100%;
+    padding: 0 1em 2em 1em;
+  }
+}

@@ -1,0 +1,106 @@
+@value makerRed,makerDark from '../../common/colors.css';
+@value mediaQuery from '../../common/size.css';
+
+.signIn_container {
+  color: makerDark;
+}
+.welcome {
+  margin-top: 2em;
+  font-size: 2em;
+  height: 4em;
+}
+.letters {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.letter {
+  font-family: 'GmarketSansBold';
+  line-height: 1.5em;
+  display: table-cell;
+  padding-right: 0.2em;
+  border-right: 0.05em solid makerDark;
+  animation: cursor 700ms ease infinite;
+}
+
+@keyframes cursor {
+  0% {
+    border-color: transparent;
+  }
+  100% {
+    border-color: black;
+  }
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+}
+.inputWrap {
+  display: flex;
+  width: 50%;
+}
+.input {
+  flex: 1;
+  margin-left: 1em;
+  border: none;
+  border-bottom: 2px solid makerDark;
+  background-color: transparent;
+  outline: 0;
+  margin-bottom: 2em;
+  font-size: 1em;
+}
+.p {
+  white-space: nowrap;
+}
+.inputError {
+  color: makerRed;
+}
+.input:focus {
+  border-bottom: 2px dashed makerDark;
+}
+.buttonWrap {
+  display: flex;
+  margin-top: 2em;
+}
+.googleLogo {
+  cursor: pointer;
+  margin: 2em;
+  width: 3em;
+  height: 3em;
+}
+.error {
+  color: makerRed;
+  font-size: 1.4em;
+  margin-right: 0.3em;
+  animation: shake 2s ease infinite;
+}
+@keyframes shake {
+  0% {
+    transform: rotate(-30deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+  100% {
+    transform: rotate(-30deg);
+  }
+}
+
+@media screen and (max-width: mediaQuery) {
+  .welcome {
+    font-size: 1.3rem;
+  }
+  .inputWrap {
+    display: block;
+    width: 100%;
+  }
+  .p {
+    margin-bottom: 0.8em;
+  }
+  .input {
+    margin-left: 0;
+  }
+}

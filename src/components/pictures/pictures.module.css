@@ -1,0 +1,72 @@
+@value makerBeige,makerBlack,makerDark from '../../common/colors.css';
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+
+.pictures_container {
+  position: relative;
+  width: 100%;
+  height: 98%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mainPictures {
+  width: 100%;
+  height: 100%;
+}
+.pictures {
+  display: flex;
+  height: 100%;
+}
+.photo {
+  margin: 2em auto 0;
+}
+.nav {
+  padding: 3em;
+  color: makerBeige;
+  font-size: 3rem;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  cursor: pointer;
+}
+.nav.left {
+  left: 0;
+}
+.nav.right {
+  right: 0;
+}
+.progressBar {
+  margin: auto;
+  width: 50%;
+  height: 0.4em;
+  border-radius: 2em;
+  background-color: makerDark;
+}
+.progress {
+  height: 100%;
+  background-color: makerBlack;
+  border-radius: 2em;
+  transition: all 600ms ease-out;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .mainPictures {
+    display: flex;
+    align-items: center;
+  }
+  .pictures {
+    height: auto;
+    display: block;
+  }
+  .photo {
+    width: 100%;
+    margin: auto 0;
+  }
+  .nav {
+    padding: 0.5em;
+    font-size: 2.5rem;
+    opacity: 0.5;
+  }
+}

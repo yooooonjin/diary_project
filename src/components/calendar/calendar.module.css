@@ -1,0 +1,28 @@
+@value makerLightPink,makerDarkBeige,makerBeige,makerDark from '../../common/colors.css';
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+
+.table {
+  margin: 8vh auto;
+}
+.td {
+  padding: 0.4em;
+}
+.today {
+  background-color: makerLightPink;
+  border-radius: 50%;
+}
+.disabled {
+  opacity: 0;
+}
+.day {
+  font-family: 'GmarketSansBold';
+}
+
+@media screen and (max-width: mediaQuery) {
+  .table {
+    margin: 6vh auto;
+  }
+  .td {
+    padding: 0;
+  }
+}

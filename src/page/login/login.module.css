@@ -1,0 +1,68 @@
+@value makerDark,makerBeige from '../../common/colors.css';
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+.login_container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login {
+  height: 35em;
+  width: 50%;
+  max-width: maxWidth;
+  min-width: minWidth;
+  text-align: center;
+  background-color: makerBeige;
+  border: 3px solid makerDark;
+  border-radius: 2em;
+  box-shadow: 6px 6px 0px 0px makerDark;
+}
+.login_mark {
+  position: relative;
+  padding: 0 1em;
+  border-bottom: 3px solid makerDark;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: makerDarkBeige;
+  border-radius: 2em 2em 0 0;
+}
+.url {
+  border: 2px solid makerDark;
+  padding: 0.2em 4em 0.2em 1em;
+  margin: 0.4em;
+  border-radius: 0.3em;
+}
+.star {
+  border: 2px solid makerDark;
+  font-size: 1.1em;
+  padding: 0.3em;
+  border-radius: 0.3em;
+}
+.arrowRotate {
+  border: 2px solid makerDark;
+  font-size: 1.1em;
+  padding: 0.3em;
+  border-radius: 0.3em;
+}
+.rights {
+  font-size: 0.7em;
+  margin-top: 2em;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .login_container {
+    padding: 0 1em;
+  }
+  .login {
+    min-width: 23.5em;
+    width: 100%;
+  }
+  .arrowRotate {
+    display: none;
+  }
+  .url {
+    width: 80%;
+  }
+}

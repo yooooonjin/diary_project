@@ -1,0 +1,53 @@
+@value makerDarkBeige,makerDark,makerBeige from '../../common/colors.css';
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+
+.calendar {
+  width: 50%;
+  max-width: maxWidth;
+  min-width: minWidth;
+  margin: auto;
+  text-align: center;
+  background-color: makerBeige;
+  border: 3px solid makerDark;
+  border-radius: 2em;
+  box-shadow: 6px 6px 0px 0px makerDark;
+  z-index: 5;
+}
+.calendar_mark {
+  position: relative;
+  padding: 0 1em;
+  border-bottom: 3px solid makerDark;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: makerDarkBeige;
+  border-radius: 2em 2em 0 0;
+}
+.deletOurDiary {
+  position: absolute;
+  left: 1.5em;
+  color: makerDark;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.deletOurDiary:hover {
+  transform: scale(1.05);
+}
+.month {
+  font-size: 1.5em;
+  margin: 0.2em 0.5em;
+}
+.button {
+  padding-top: 0.2em;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+@media screen and (max-width: mediaQuery) {
+  .calendar {
+    min-width: 23.5em;
+    width: 100%;
+  }
+  .month {
+    font-size: 1.2em;
+  }
+}

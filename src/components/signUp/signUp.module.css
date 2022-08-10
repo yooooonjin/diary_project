@@ -1,0 +1,64 @@
+@value makerRed, makerDark from '../../common/colors.css';
+@value mediaQuery from '../../common/size.css';
+
+.form {
+  height: 100%;
+}
+.signUp_container {
+  display: none;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.createInput {
+  background-color: transparent;
+  width: 65%;
+  margin-bottom: 1em;
+  padding: 1em 2em;
+  font-size: 1.5rem;
+  border: none;
+  text-align: center;
+}
+.createInput.error::placeholder {
+  color: makerRed;
+}
+.errormessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.overlapError {
+  color: makerRed;
+  margin: 0 0.1em;
+}
+.createInput::placeholder {
+  font-size: 1rem;
+  text-align: center;
+  color: makerDark;
+}
+.createInput:focus {
+  border: 2px solid makerDark;
+  border-radius: 0.2em;
+  background-color: white;
+}
+.buttonWrap {
+  margin-top: 2em;
+}
+.cancel {
+  background-color: transparent;
+  border: 2px solid makerDark;
+  color: makerDark;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .createInput {
+    width: 85%;
+    margin-bottom: 1em;
+    padding: 1em 2em;
+    font-size: 1.5rem;
+    border: none;
+    text-align: center;
+  }
+}

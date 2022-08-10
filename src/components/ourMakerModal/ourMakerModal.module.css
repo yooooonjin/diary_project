@@ -1,0 +1,99 @@
+@value makerDarkBeige,makerDark,makerBeige from '../../common/colors.css';
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+
+.makerModal {
+  position: fixed;
+  top: 5em;
+  left: 13em;
+  width: 30em;
+  height: 60vh;
+  z-index: 20;
+  background-color: makerBeige;
+  border: 3px solid makerDark;
+  border-radius: 25px;
+  color: makerDark;
+  display: flex;
+  flex-direction: column;
+}
+.makerModal_mark {
+  position: relative;
+  padding: 0.4em 1em;
+  display: flex;
+  background-color: makerDark;
+  border-radius: 20px 20px 0 0;
+  justify-content: center;
+  color: makerBeige;
+}
+.maker {
+  padding: 2em;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.makerTitle {
+  font-size: 1.3rem;
+  color: makerDark;
+  padding: 0.3em 0;
+}
+.form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.textarea {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  padding: 1em;
+}
+.input {
+  display: none;
+}
+.imageUploadBtn {
+  width: 100%;
+  padding: 0.5em;
+  height: 2.5em;
+  background-color: makerDarkBeige;
+}
+.loading {
+  width: 100%;
+  height: 100%;
+  animation: loading 4s ease-in-out infinite;
+  background-color: makerDark;
+  color: transparent;
+}
+@keyframes loading {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+.button_container {
+  display: flex;
+  justify-content: center;
+  height: 2.3em;
+  margin: 1.5em 0 0 0;
+}
+.button {
+  cursor: pointer;
+  margin: 0 0.8em;
+  padding: 0.4em 2.5em;
+  color: makerDark;
+  border: 2px solid makerDark;
+  border-radius: 0.5em;
+}
+.confirmBtn {
+  background-color: makerDark;
+  color: white;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .makerModal {
+    transform: none;
+    position: static;
+    min-width: 23.5em;
+    width: 100%;
+  }
+}

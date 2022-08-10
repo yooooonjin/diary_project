@@ -1,0 +1,30 @@
+@value makerDarkBeige, makerDark from '../../common/colors.css';
+
+.input {
+  display: none;
+}
+.fileUpload {
+  border: 2px dashed makerDark;
+  color: makerDark;
+  font-family: 'GmarketSansMedium';
+  border-radius: 0.5em;
+  margin: 0 0.5em;
+  cursor: pointer;
+  width: 10em;
+  height: 100%;
+}
+.loading {
+  width: 100%;
+  height: 100%;
+  animation: loading 2s ease-in-out infinite;
+  background-color: makerDark;
+  color: transparent;
+}
+@keyframes loading {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}

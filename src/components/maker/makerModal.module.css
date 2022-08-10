@@ -1,0 +1,165 @@
+@value makerDarkBeige,makerDark,makerBeige from '../../common/colors.css';
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+
+.makerModalBack {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.makerModal {
+  position: fixed;
+  transform: translate(160px, 80px);
+  height: 85%;
+  z-index: 20;
+
+  background-color: makerBeige;
+  border: 3px solid makerDark;
+  border-radius: 25px;
+  color: makerDark;
+}
+.makerModal_mark {
+  position: relative;
+  padding: 0.4em 1em;
+  display: flex;
+  background-color: makerDark;
+  border-radius: 20px 20px 0 0;
+  justify-content: center;
+  color: makerBeige;
+}
+.maker {
+  padding: 0.5em;
+  width: 100%;
+  height: 95%;
+  transition: all 300ms ease-in;
+  display: flex;
+  flex-direction: column;
+}
+.makerTitle {
+  font-size: 1.3rem;
+  color: makerDark;
+  padding: 0.3em 0;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid makerDark;
+  border-left: 1px solid makerDark;
+
+  flex: 1;
+}
+.form p {
+  font-size: 0.8rem;
+}
+.row {
+  display: flex;
+  align-items: center;
+}
+.rowContent {
+  width: 100%;
+  display: flex;
+}
+.rowContent > div {
+  flex: 1 1 50%;
+}
+.input,
+.textarea {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  width: 100%;
+}
+.column {
+  border-right: 1px solid makerDark;
+  border-bottom: 1px solid makerDark;
+}
+.column,
+.textarea {
+  padding: 0.3em 0.6em;
+}
+.dateTitle {
+  width: 3em;
+  margin-right: 0.3em;
+}
+
+.textarea {
+  flex: 1;
+  padding-top: 1em;
+}
+
+.rights {
+  margin-top: 2em;
+  font-size: 0.5rem;
+  text-align: center;
+}
+.weather {
+  text-align: center;
+  padding-top: 1em;
+}
+.button_container {
+  display: flex;
+  justify-content: center;
+  height: 2.3em;
+  margin: 1.5em;
+}
+.confirmBtn {
+  margin: 0 0.5em;
+  padding: 0.4em 2.5em;
+  background-color: makerDark;
+  color: white;
+  border-radius: 0.5em;
+}
+.mainFileUpload {
+  height: 2.3em;
+  padding: 0;
+  background-color: makerDarkBeige;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.darkVer {
+  background-color: #ffdeda;
+}
+.mainFileInput {
+  display: none;
+}
+.mainfileUploadBtn {
+  width: 100%;
+  cursor: pointer;
+}
+.loading {
+  margin: auto;
+  width: 1.8em;
+  height: 1.8em;
+  border: 3px solid makerBeige;
+  border-top: 3px solid makerDark;
+  border-radius: 50%;
+  animation: loading 1s linear infinite;
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.guide {
+  text-align: center;
+  font-size: 0.7rem;
+  margin-bottom: 0.5em;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .makerModalWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .makerModal {
+    position: static;
+    transform: none;
+  }
+}

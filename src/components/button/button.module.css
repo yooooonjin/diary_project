@@ -1,0 +1,20 @@
+@value makerRed,makerDark from '../../common/colors.css';
+
+.button {
+  cursor: pointer;
+  background-color: makerDark;
+  border: 2px solid makerDark;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5em 2em;
+  border-radius: 8px;
+  margin: 0 0.5em;
+}
+.line {
+  background-color: transparent;
+  border: 2px solid makerDark;
+  color: makerDark;
+}
+.button:hover {
+  transform: scale(1.03);
+}

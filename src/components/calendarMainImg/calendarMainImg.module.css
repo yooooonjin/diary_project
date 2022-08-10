@@ -1,0 +1,68 @@
+@value makerDark from '../../common/colors.css';
+@value mediaQuery,maxWidth,minWidth from '../../common/size.css';
+
+.images {
+  position: relative;
+  width: 4.5em;
+  height: 4.5em;
+  color: makerDark;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.images:hover .image {
+  transform: scale(1.05);
+}
+.image {
+  transition: all 200ms ease-in;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+.day {
+  position: absolute;
+  z-index: 5;
+  font-size: 0.9rem;
+}
+.images:hover .folder {
+  opacity: 0;
+}
+.images:hover .folderOpen {
+  opacity: 1;
+}
+.images:hover .day.white {
+  opacity: 0;
+}
+.white {
+  color: white;
+  text-shadow: 2px 2px 4px black;
+}
+.folder,
+.folderOpen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  font-size: 3em;
+}
+.folderOpen {
+  opacity: 0;
+  left: 53%;
+}
+
+@media screen and (max-width: mediaQuery) {
+  .images {
+    width: 3em;
+    height: 3em;
+  }
+  .folder,
+  .folderOpen {
+    font-size: 2em;
+  }
+  .day {
+    font-size: 0.8rem;
+  }
+}
