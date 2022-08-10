@@ -1,0 +1,11 @@
+{
+  "id": 0,
+  "date": "",
+  "weather": "sun",
+  "location": "장소를 입력해주세요",
+  "title": "제목을 입력해주세요 :)",
+  "contents": "일기를 작성해주세요.",
+  "compliment": "",
+  "regret": "",
+  "pictures": [{ "URL": "/images/not-available.png" }]
+}

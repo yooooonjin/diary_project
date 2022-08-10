@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/record-of-memories/static/css/main.16636313.css",
+    "main.js": "/record-of-memories/static/js/main.45915cfa.js",
+    "static/media/backgroundImg.jpg": "/record-of-memories/static/media/backgroundImg.0d4e551771faf0c35744.jpg",
+    "index.html": "/record-of-memories/index.html",
+    "main.16636313.css.map": "/record-of-memories/static/css/main.16636313.css.map",
+    "main.45915cfa.js.map": "/record-of-memories/static/js/main.45915cfa.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.16636313.css",
+    "static/js/main.45915cfa.js"
+  ]
+}
