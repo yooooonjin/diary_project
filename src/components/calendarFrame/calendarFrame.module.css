@@ -11,7 +11,7 @@
   border: 3px solid makerDark;
   border-radius: 2em;
   box-shadow: 6px 6px 0px 0px makerDark;
-  z-index: 5;
+  z-index: 10;
 }
 .calendar_mark {
   position: relative;
@@ -25,10 +25,10 @@
 }
 .deletOurDiary {
   position: absolute;
-  left: 1.5em;
-  color: makerDark;
-  font-size: 0.8rem;
+  left: 1.2em;
+  font-size: 1.2rem;
   cursor: pointer;
+  display: flex;
 }
 .deletOurDiary:hover {
   transform: scale(1.05);
@@ -42,12 +42,20 @@
   font-size: 1.2em;
   cursor: pointer;
 }
+.pcHide {
+  display: none;
+}
 @media screen and (max-width: mediaQuery) {
   .calendar {
-    min-width: 23.5em;
+    min-width: 10em;
     width: 100%;
   }
   .month {
     font-size: 1.2em;
+  }
+  .pcHide {
+    display: block;
+    display: flex;
+    align-items: center;
   }
 }

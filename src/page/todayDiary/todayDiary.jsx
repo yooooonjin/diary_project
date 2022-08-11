@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './todayDiary.module.css';
 
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import MakerModal from '../../components/maker/makerModal';
 import MoreViewModal from '../../components/moreViewModal/moreViewModal';
 import WallpaperIcon from '../../components/wallpaperIcon/wallpaperIcon';
 import ConfirmModal from '../../components/confirmModal/confirmModal';
+import { closeModal, openModal } from '../../service/modalController';
 
 const TodayDiary = ({ diaryRepository, fileUpload }) => {
   const navigate = useNavigate();
@@ -20,35 +21,26 @@ const TodayDiary = ({ diaryRepository, fileUpload }) => {
     edit: false,
     moreView: false,
     delete: false,
+    diary: true,
   });
 
-  console.log(user);
-
-  //modal 열기
-  const openModal = (target) => {
-    setShowModal((showModal) => {
-      const newModalState = { ...showModal, [target]: true };
-      return newModalState;
-    });
-  };
-  //modal 닫기
-  const closeModal = (target) => {
-    setShowModal((showModal) => {
-      const newModalState = { ...showModal, [target]: false };
-      return newModalState;
-    });
-  };
+  useEffect(() => {
+    console.log('user : ', user);
+    console.log('사용자 아니면 퇴장');
+    !user.userId && navigate('/');
+  }, [user]);
 
   //일기 작성 시 fireBase 저장
   const onUpdate = (key, value) => {
+    console.log('일기저장');
     const newMemory = { ...memory, [key]: value };
-    console.log('newMemory : ', newMemory);
     setMemory(newMemory);
     diaryRepository.saveDiary(user.userId, newMemory, day);
   };
 
   //일기 삭제
   const onDelete = () => {
+    console.log('일기삭제');
     const newMemory = { ...memory };
     if (!newMemory) {
       return;
@@ -58,7 +50,7 @@ const TodayDiary = ({ diaryRepository, fileUpload }) => {
     }
     setMemory(newMemory);
     diaryRepository.deleteDiary(user.userId, day);
-    setShowModal({ edit: false, moreView: false, delete: false });
+    setShowModal({ edit: false, moreView: false, delete: false, diary: true });
   };
 
   const wallpaperIcon = [
@@ -71,7 +63,7 @@ const TodayDiary = ({ diaryRepository, fileUpload }) => {
     {
       name: '기록하기',
       src: '/images/editIcon.svg',
-      onClick: () => openModal('edit'),
+      onClick: () => setShowModal(openModal('edit', showModal)),
     },
     {
       name: '사진 더보기',
@@ -80,7 +72,15 @@ const TodayDiary = ({ diaryRepository, fileUpload }) => {
           ? '/images/moreViewIcon.svg'
           : '/images/moreViewEmpty.svg'
       }`,
-      onClick: () => openModal('moreView'),
+      onClick: () => setShowModal(openModal('moreView', showModal)),
+    },
+  ];
+
+  const noteIcon = [
+    {
+      name: '오늘의일기',
+      src: '/images/noteIcon.svg',
+      onClick: () => setShowModal(openModal('diary', showModal)),
     },
   ];
 
@@ -92,39 +92,52 @@ const TodayDiary = ({ diaryRepository, fileUpload }) => {
           updateContent={onUpdate}
           day={day}
           fileUpload={fileUpload}
-          onClose={closeModal}
+          showModal={showModal}
+          setShowModal={setShowModal}
         />
       )}
       {showModal.moreView && (
         <MoreViewModal
           pictures={memory && memory.pictures}
-          onClose={closeModal}
-          target={'moreView'}
+          onClose={() => {
+            setShowModal(closeModal('moreView', showModal));
+          }}
         />
       )}
       {showModal.delete && (
         <ConfirmModal
           message='정말 오늘의 일기를 지울건가요? :('
-          onCancel={() => closeModal('delete')}
+          onCancel={() => setShowModal(closeModal('delete', showModal))}
           onConfirm={onDelete}
         />
       )}
-      <WallpaperIcon wallpaperIcon={wallpaperIcon} onModalOpen={openModal} />
+      <div
+        className={`${
+          (showModal.edit ||
+            showModal.moreView ||
+            showModal.delete ||
+            showModal.diary) &&
+          styles.hide
+        }`}
+      >
+        <WallpaperIcon wallpaperIcon={wallpaperIcon} />
+        <div className={styles.pcHide}>
+          <WallpaperIcon wallpaperIcon={noteIcon} location='right' />
+        </div>
+      </div>
       <div
         className={`${styles.diaryWrap} ${
           (showModal.edit || showModal.moreView) && styles.hide
         }`}
       >
-        {
+        {showModal.diary && (
           <Diary
             memory={memory}
             day={day}
-            onDelete={onDelete}
-            showModal={showModal.delete}
-            onModalClose={closeModal}
-            onModalOpen={openModal}
+            showModal={showModal}
+            setShowModal={setShowModal}
           />
-        }
+        )}
       </div>
     </section>
   );

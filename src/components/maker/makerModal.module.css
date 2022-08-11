@@ -5,7 +5,8 @@
   position: fixed;
   width: 100%;
   height: 100%;
-  opacity: 0;
+  z-index: 15;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 .makerModal {
   position: fixed;
@@ -80,6 +81,7 @@
 .dateTitle {
   width: 3em;
   margin-right: 0.3em;
+  white-space: nowrap;
 }
 
 .textarea {
@@ -113,7 +115,7 @@
   height: 2.3em;
   padding: 0;
   background-color: makerDarkBeige;
-  z-index: 5;
+  z-index: 25;
   display: flex;
   align-items: center;
   text-align: center;
@@ -153,13 +155,25 @@
 }
 
 @media screen and (max-width: mediaQuery) {
+  .makerModalBack {
+    display: none;
+  }
   .makerModalWrap {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
   }
   .makerModal {
+    min-width: 10em;
+    width: 100%;
     position: static;
     transform: none;
+  }
+  .hide {
+    display: none;
+  }
+  .button_container {
+    margin: 1em 0.2em;
   }
 }

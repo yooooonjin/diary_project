@@ -6,16 +6,20 @@ import Dots from '../dots/dots';
 import { useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleLeft, faCircleRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircleLeft,
+  faCircleRight,
+  faTrashCan,
+} from '@fortawesome/free-solid-svg-icons';
 import XButton from '../xButton/xButton';
-import Button from '../button/button';
+import { closeModal, openModal } from '../../service/modalController';
 
 const CalendarFrame = ({
   memories,
   user,
+  showModal,
+  setShowModal,
   selectDiary,
-  onClose,
-  onDeleteOurMemories,
 }) => {
   const [getMoment, setMoment] = useState(moment());
   const today = getMoment;
@@ -32,41 +36,57 @@ const CalendarFrame = ({
   };
 
   return (
-    <div className={styles.calendar}>
-      <div className={styles.calendar_mark}>
-        {!onClose && <Dots />}
-        {onDeleteOurMemories && (
-          <p className={styles.deletOurDiary} onClick={onDeleteOurMemories}>
-            일기장 삭제
-          </p>
-        )}
-        <button
-          className={styles.button}
-          onClick={() => {
-            setMoment(getMoment.clone().subtract(1, 'month'));
-          }}
-        >
-          <FontAwesomeIcon icon={faCircleLeft} />
-        </button>
-        <div className={styles.month}>{today.format('YYYY년 MM월')}</div>
-        <button
-          className={styles.button}
-          onClick={() => {
-            setMoment(getMoment.clone().add(1, 'month'));
-          }}
-        >
-          <FontAwesomeIcon icon={faCircleRight} />
-        </button>
-        {onClose && (
-          <XButton
+    <>
+      <div className={styles.calendar}>
+        <div className={styles.calendar_mark}>
+          {!selectDiary && <Dots />}
+          {selectDiary && (
+            <p
+              className={styles.deletOurDiary}
+              onClick={() => {
+                setShowModal(openModal('delete', showModal));
+              }}
+            >
+              <FontAwesomeIcon icon={faTrashCan} />
+            </p>
+          )}
+          <button
+            className={styles.button}
             onClick={() => {
-              onClose('ourCalendar');
+              setMoment(getMoment.clone().subtract(1, 'month'));
             }}
-          />
-        )}
+          >
+            <FontAwesomeIcon icon={faCircleLeft} />
+          </button>
+          <div className={styles.month}>{today.format('YYYY년 MM월')}</div>
+          <button
+            className={styles.button}
+            onClick={() => {
+              setMoment(getMoment.clone().add(1, 'month'));
+            }}
+          >
+            <FontAwesomeIcon icon={faCircleRight} />
+          </button>
+          <div className={styles.pcHide}>
+            {!selectDiary && (
+              <XButton
+                onClick={() => {
+                  setShowModal(closeModal('calendar', showModal));
+                }}
+              />
+            )}
+          </div>
+          {selectDiary && (
+            <XButton
+              onClick={() => {
+                setShowModal(closeModal('ourCalendar', showModal));
+              }}
+            />
+          )}
+        </div>
+        <Calendar today={today} onDateClick={onDateClick} memories={memories} />
       </div>
-      <Calendar today={today} onDateClick={onDateClick} memories={memories} />
-    </div>
+    </>
   );
 };
 

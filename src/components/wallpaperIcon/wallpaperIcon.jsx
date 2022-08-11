@@ -16,7 +16,7 @@ const WallpaperIcon = ({ wallpaperIcon, location }) => {
                 onClick={icon.onClick}
                 id={icon.name}
                 className={styles.icon}
-                src={icon.src}
+                src={process.env.PUBLIC_URL + icon.src}
               />
               <p className={styles.iconName}>{icon.name}</p>
             </div>

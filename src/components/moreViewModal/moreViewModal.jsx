@@ -5,16 +5,10 @@ import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import Pictures from '../pictures/pictures';
 import XButton from '../xButton/xButton';
 
-const MoreViewModal = ({ pictures, onClose, target }) => {
+const MoreViewModal = ({ pictures, onClose }) => {
   return (
     <section className={styles.moreViewModal}>
-      <XButton
-        onClick={() => {
-          onClose(target);
-        }}
-        version={'beige'}
-        marginSize={'1em'}
-      />
+      <XButton onClick={onClose} version={'beige'} marginSize={'1em'} />
       {pictures && <Pictures images={pictures} />}
       {!pictures && (
         <div className={styles.noPicture}>

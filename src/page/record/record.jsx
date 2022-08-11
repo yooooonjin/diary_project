@@ -4,6 +4,7 @@ import ConfirmModal from '../../components/confirmModal/confirmModal';
 import WallpaperIcon from '../../components/wallpaperIcon/wallpaperIcon';
 import styles from './record.module.css';
 import CalendarFrame from '../../components/calendarFrame/calendarFrame';
+import { closeModal, openModal } from '../../service/modalController';
 
 const Record = ({ diaryRepository, userRepository, auth }) => {
   const navigate = useNavigate();
@@ -12,20 +13,12 @@ const Record = ({ diaryRepository, userRepository, auth }) => {
 
   const [user, setUser] = useState();
   const [memories, setMemories] = useState({});
-  const [showModal, setShowModal] = useState({ delete: false });
-
-  console.log(user);
-
-  //기록 가져오기
-  useEffect(() => {
-    const stopSync = diaryRepository.syncDiary(stateUserId, (data) => {
-      setMemories(data);
-    });
-    return () => stopSync();
-  }, [diaryRepository]);
+  const [showModal, setShowModal] = useState({ delete: false, calendar: true });
 
   //인증
   useEffect(() => {
+    console.log(user);
+    console.log('본인인증');
     auth.authChange((user) => {
       !user && navigate('/');
     });
@@ -33,22 +26,33 @@ const Record = ({ diaryRepository, userRepository, auth }) => {
 
   //사용자 정보 가져오기
   useEffect(() => {
+    console.log('사용자 정보가져옴');
     const stopSync = userRepository.syncUser(stateUserId, (userInfo) => {
       setUser(userInfo);
     });
     return () => stopSync();
   }, []);
+  //기록 가져오기
+  useEffect(() => {
+    console.log('기록가져오기');
+    const stopSync = diaryRepository.syncDiary(stateUserId, (data) => {
+      setMemories(data);
+    });
+    return () => stopSync();
+  }, [user, diaryRepository]);
 
   //로그아웃
   const onLogout = () => {
+    console.log('로그아웃');
     auth.logout();
   };
 
   //계정탈퇴
   const onDeleteAccount = () => {
-    auth.deleteAuth().then(() => {
-      userRepository.deleteUser(user.id);
-    });
+    console.log('계정탈퇴');
+    userRepository.deleteUser(user.userId);
+    console.log(user.userId);
+    auth.deleteAuth();
   };
 
   const wallpaperIcon = [
@@ -60,7 +64,7 @@ const Record = ({ diaryRepository, userRepository, auth }) => {
     {
       name: '계정탈퇴',
       src: '/images/deleteAccounticon.svg',
-      onClick: () => setShowModal({ delete: true }),
+      onClick: () => setShowModal(openModal('delete', showModal)),
     },
     {
       name: '우리들 이야기',
@@ -70,16 +74,41 @@ const Record = ({ diaryRepository, userRepository, auth }) => {
       },
     },
   ];
+  const myDiaryIcon = [
+    {
+      name: '일기장',
+      src: '/images/calendarIcon.svg',
+      onClick: () => {
+        setShowModal(openModal('calendar', showModal));
+      },
+    },
+  ];
 
   return (
     <section id='record'>
       <div className={styles.record}>
-        <WallpaperIcon wallpaperIcon={wallpaperIcon} />
-        <CalendarFrame memories={memories} user={user} />
+        <div
+          className={`${
+            (showModal.delete || showModal.calendar) && styles.hide
+          }`}
+        >
+          <WallpaperIcon wallpaperIcon={wallpaperIcon} />
+          <div className={styles.pcHide}>
+            <WallpaperIcon wallpaperIcon={myDiaryIcon} location='right' />
+          </div>
+        </div>
+        {showModal.calendar && (
+          <CalendarFrame
+            memories={memories}
+            user={user}
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
+        )}
         {showModal.delete && (
           <ConfirmModal
             message='정말 계정을 삭제하시겠습니까?'
-            onCancel={() => setShowModal({ delete: false })}
+            onCancel={() => setShowModal(closeModal('delete', showModal))}
             onConfirm={onDeleteAccount}
           />
         )}

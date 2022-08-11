@@ -12,4 +12,7 @@
   .ourRecord {
     padding: 0 1em;
   }
+  .hide {
+    display: none;
+  }
 }

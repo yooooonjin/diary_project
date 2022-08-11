@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './diary.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -9,18 +9,12 @@ import {
   faUmbrella,
   faSnowflake,
 } from '@fortawesome/free-solid-svg-icons';
-import ConfirmModal from '../confirmModal/confirmModal';
 import Dots from '../dots/dots';
 import Button from '../button/button';
+import XButton from '../xButton/xButton';
+import { closeModal, openModal } from '../../service/modalController';
 
-const Diary = ({
-  memory,
-  day,
-  onDelete,
-  showModal,
-  onModalClose,
-  onModalOpen,
-}) => {
+const Diary = ({ memory, day, showModal, setShowModal }) => {
   const {
     weather,
     location,
@@ -57,7 +51,12 @@ const Diary = ({
             <span className={styles.place}>{location || '장소'}</span>
           </div>
         </div>
-        <div>
+        <div className={styles.pcHide}>
+          <XButton
+            onClick={() => setShowModal(closeModal('diary', showModal))}
+          />
+        </div>
+        <div className={styles.hide}>
           {
             {
               sun: <FontAwesomeIcon icon={faSun} className={styles.weather} />,
@@ -125,7 +124,7 @@ const Diary = ({
           <div className={styles.button_container}>
             <Button
               message='일기 지우기'
-              onClick={() => onModalOpen('delete')}
+              onClick={() => setShowModal(openModal('delete', showModal))}
               type='button'
               size='0.8em'
               version='line'

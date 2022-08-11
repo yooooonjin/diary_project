@@ -93,7 +93,7 @@
   .makerModal {
     transform: none;
     position: static;
-    min-width: 23.5em;
+    min-width: 10em;
     width: 100%;
   }
 }

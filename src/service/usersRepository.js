@@ -11,6 +11,8 @@ class UsersRepository {
   };
   deleteUser = (userId) => {
     remove(ref(this.db, `userInfo/${userId}`));
+    remove(ref(this.db, `diary/${userId}`));
+    remove(ref(this.db, `myList/${userId}`));
   };
 
   syncUser = (userId, onUpdate) => {

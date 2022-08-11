@@ -7,21 +7,24 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Dots from '../dots/dots';
 import XButton from '../xButton/xButton';
+import { closeModal } from '../../service/modalController';
 
-const InviteModal = ({ userRepository, me, onClose, onMakeOurMemories }) => {
+const InviteModal = ({
+  userRepository,
+  me,
+  showModal,
+  setShowModal,
+  onMakeOurMemories,
+}) => {
   const [users, setUsers] = useState([]);
   const [searchBar, setSearchBar] = useState();
   const [searchFriends, setSearchFriends] = useState();
   const [selectedFriends, setSelectedFriends] = useState([]);
   const inputRef = useRef();
 
-  console.log('users : ', users);
-  console.log('searchFriends : ', searchFriends);
-  console.log('selectedFriends : ', selectedFriends);
-  console.log('me : ', me);
-
   //본인 제외한 모든 사용자 정보
   useEffect(() => {
+    console.log('본인 제외한 모든 사용자 정보');
     const users = [];
     const stopSync = userRepository.syncUsers((data) => {
       for (const key in data) {
@@ -38,11 +41,13 @@ const InviteModal = ({ userRepository, me, onClose, onMakeOurMemories }) => {
 
   //검색창 입력
   const handleSearchBarChange = (e) => {
+    console.log('검색창 입력');
     setSearchBar(e.target.value);
   };
 
   //친구 검색
   const handleFriendSearch = (e) => {
+    console.log('친구검색');
     e.preventDefault();
     const friendList = users.filter((user) => {
       return user.userName.indexOf(searchBar) >= 0;
@@ -53,6 +58,7 @@ const InviteModal = ({ userRepository, me, onClose, onMakeOurMemories }) => {
 
   //함께 일기장을 작성할 친구 선택
   const handleSelectedFriend = (e) => {
+    console.log('함께 일기장을 작성할 친구 선택');
     e.preventDefault();
     const selected = JSON.parse(e.currentTarget.id);
     setUsers((users) => {
@@ -68,6 +74,7 @@ const InviteModal = ({ userRepository, me, onClose, onMakeOurMemories }) => {
 
   //선택된 목록에서 친구 제외하기
   const handleSelectedFriendRemove = (e) => {
+    console.log('선택된 목록에서 친구 제외하기');
     e.preventDefault();
     const remove = JSON.parse(e.currentTarget.id);
     setUsers((users) => [...users, remove]);
@@ -97,13 +104,11 @@ const InviteModal = ({ userRepository, me, onClose, onMakeOurMemories }) => {
                 className={styles.search}
                 onClick={handleFriendSearch}
               />
-              {onClose && (
-                <XButton
-                  onClick={() => {
-                    onClose('invite');
-                  }}
-                />
-              )}
+              <XButton
+                onClick={() => {
+                  setShowModal(closeModal('invite', showModal));
+                }}
+              />
             </div>
             <div className={styles.friends_container}>
               <div className={styles.selectedFriends}>

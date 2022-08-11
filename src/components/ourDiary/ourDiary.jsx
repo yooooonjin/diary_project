@@ -1,8 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import styles from './ourDiary.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleRight, faCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import { closeModal, openModal } from '../../service/modalController';
 import MoreViewModal from '../moreViewModal/moreViewModal';
+import XButton from '../xButton/xButton';
 import Dots from '../dots/dots';
 
 const OurDiary = ({
@@ -10,44 +12,28 @@ const OurDiary = ({
   day,
   user,
   member,
-  openModal,
-  showModal,
-  closeModal,
   updateContent,
+  setShowModal,
+  showModal,
+  selectedFriend,
+  selectFriend,
+  count,
+  calCount,
 }) => {
-  console.log(memory);
+  console.log('memory : ', memory);
+  console.log(Object.keys(memory).length);
 
   const commentInputRef = useRef();
-  const [selectedFriend, setSelectedFriend] = useState('');
   const { contents, pictures, comment } = memory[selectedFriend] || {};
-  const [count, setCount] = useState(0);
 
-  //선택된 친구
-  const onSelectFriend = (e) => {
-    e.preventDefault();
-    setSelectedFriend(e.currentTarget.id);
-    setCount(0);
+  const handleCalCount = (e) => {
+    const target = e.target.id;
+    calCount(target);
   };
-
-  //화면에 보이는 댓글 지정
-  const onCount = useCallback((e) => {
-    const maxCount = memory[selectedFriend].comment.length;
-    if (e.currentTarget.id === 'right') {
-      setCount((count) => {
-        if (count >= maxCount - 1) return 0;
-
-        return count + 1;
-      });
-    } else {
-      setCount((count) => {
-        if (count <= 0) return maxCount - 1;
-        return count - 1;
-      });
-    }
-  });
 
   //댓글달기
   const handleCommentSend = (e) => {
+    console.log('댓글달기');
     e.preventDefault();
     const commentTxt = `${user.userName} : ${commentInputRef.current.value}`;
     const newComment = comment ? comment : [];
@@ -65,8 +51,18 @@ const OurDiary = ({
             <p className={styles.date}>{day}</p>
           </div>
         </div>
+        <div className={styles.pcHide}>
+          <XButton
+            onClick={() => {
+              setShowModal(closeModal('ourDiary', showModal));
+            }}
+          />
+        </div>
       </div>
       <div className={styles.diary_container}>
+        {Object.keys(memory).length <= 0 && (
+          <div className={styles.emptyTxt}>너의 하루는 어땠어?</div>
+        )}
         <div className={styles.diary}>
           <div className={styles.noteBox}>
             {memory &&
@@ -74,7 +70,7 @@ const OurDiary = ({
                 const user = member.find((user) => user.userId === key);
                 return (
                   <div
-                    onClick={onSelectFriend}
+                    onClick={selectFriend}
                     className={styles.noteFile}
                     id={key}
                     key={key}
@@ -83,8 +79,9 @@ const OurDiary = ({
                       className={styles.noteFileImg}
                       src={
                         key === selectedFriend
-                          ? `/images/selectNoteFile.svg`
-                          : `/images/noteFile.svg`
+                          ? process.env.PUBLIC_URL +
+                            `/images/selectNoteFile.svg`
+                          : process.env.PUBLIC_URL + `/images/noteFile.svg`
                       }
                     />
                     <p className={styles.noteFileDesc}>
@@ -99,7 +96,7 @@ const OurDiary = ({
               {pictures && (
                 <div
                   onClick={() => {
-                    openModal('friendPictures');
+                    setShowModal(openModal('friendPictures', showModal));
                   }}
                   className={styles.morePictures}
                 >
@@ -112,7 +109,7 @@ const OurDiary = ({
                   {comment.length > 1 && (
                     <FontAwesomeIcon
                       id='left'
-                      onClick={onCount}
+                      onClick={handleCalCount}
                       icon={faCircleLeft}
                       className={styles.arrow}
                     />
@@ -123,7 +120,7 @@ const OurDiary = ({
                   {comment.length > 1 && (
                     <FontAwesomeIcon
                       id='right'
-                      onClick={onCount}
+                      onClick={handleCalCount}
                       icon={faCircleRight}
                       className={styles.arrow}
                     />
@@ -150,8 +147,9 @@ const OurDiary = ({
         {showModal.friendPictures && (
           <MoreViewModal
             pictures={pictures}
-            onClose={closeModal}
-            target={'friendPictures'}
+            onClose={() =>
+              setShowModal(closeModal('friendPictures', showModal))
+            }
           />
         )}
       </div>

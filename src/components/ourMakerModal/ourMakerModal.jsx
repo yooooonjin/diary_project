@@ -2,12 +2,13 @@ import React, { useRef, useState } from 'react';
 import styles from './ourMakerModal.module.css';
 import Button from '../button/button';
 import XButton from '../xButton/xButton';
+import { closeModal, openModal } from '../../service/modalController';
 
 const OurMakerModal = ({
   updateContent,
   fileUpload,
-  openModal,
-  closeModal,
+  setShowModal,
+  showModal,
 }) => {
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +22,7 @@ const OurMakerModal = ({
 
   const onSubmit = (event) => {
     event.preventDefault();
-    closeModal('edit');
+    setShowModal(closeModal('edit', showModal));
     if (textareaRef.current.value.trim() === '') return;
     updateContent('contents', textareaRef.current.value);
   };
@@ -49,7 +50,7 @@ const OurMakerModal = ({
           <XButton
             version={'beige'}
             onClick={() => {
-              closeModal('edit');
+              setShowModal(closeModal('edit', showModal));
             }}
           />
         </div>
@@ -82,7 +83,7 @@ const OurMakerModal = ({
             <div className={styles.button_container}>
               <Button
                 message='지우기'
-                onClick={() => openModal('delete')}
+                onClick={() => setShowModal(openModal('delete', showModal))}
                 version='line'
                 type='button'
               />

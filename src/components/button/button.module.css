@@ -9,6 +9,7 @@
   padding: 0.5em 2em;
   border-radius: 8px;
   margin: 0 0.5em;
+  white-space: nowrap;
 }
 .line {
   background-color: transparent;

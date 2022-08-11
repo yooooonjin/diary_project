@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import styles from './ourRecord.module.css';
 import CalendarFrame from '../../components/calendarFrame/calendarFrame';
 import WallpaperIcon from '../../components/wallpaperIcon/wallpaperIcon';
 import InviteModal from '../../components/inviteModal/inviteModal';
-import styles from './ourRecord.module.css';
+import {
+  closeAllModal,
+  closeModal,
+  openModal,
+} from '../../service/modalController';
+import ConfirmModal from '../../components/confirmModal/confirmModal';
 
 const OurRecord = ({ userRepository, diaryRepository }) => {
   const navigate = useNavigate();
@@ -17,21 +23,20 @@ const OurRecord = ({ userRepository, diaryRepository }) => {
   const [showModal, setShowModal] = useState({
     invite: false,
     ourCalendar: false,
+    delete: false,
   });
 
-  console.log('user : ', user);
   let iconIndex = 0;
-  console.log('myMemoryList : ', myMemoryList);
-  console.log('ourDiaryIcon :', ourDiaryIcon);
-  console.log('selectDiary :', selectDiary);
-  console.log('ourMemories :', ourMemories);
 
   useEffect(() => {
+    console.log('user : ', user);
+    console.log('사용자 아니면 퇴장');
     !user.userId && navigate('/');
   }, [user]);
 
   // 일기 리스트 가져오기
   useEffect(() => {
+    console.log('일기리스트 가져오기');
     const stopSync = diaryRepository.syncMyDiaryList(user.userId, (data) => {
       setMyMemoryList(data);
     });
@@ -40,6 +45,7 @@ const OurRecord = ({ userRepository, diaryRepository }) => {
 
   //우리의 일기 데이터 가져오기
   useEffect(() => {
+    console.log('일기장 데이터 가져오기');
     let ourDiaryList = [];
     for (const key in myMemoryList) {
       ourDiaryList.push({
@@ -50,10 +56,10 @@ const OurRecord = ({ userRepository, diaryRepository }) => {
             setOurMemories({});
             setSelectDiary(key);
             setOurMemories(data);
+            stopSync();
           });
-          // stopSync();
 
-          openModal('ourCalendar');
+          setShowModal(openModal('ourCalendar', showModal));
         },
       });
       iconIndex++;
@@ -61,23 +67,10 @@ const OurRecord = ({ userRepository, diaryRepository }) => {
     setOurDiaryIcon(ourDiaryList);
   }, [myMemoryList]);
 
-  const openModal = (target) => {
-    setShowModal((showModal) => {
-      const newModalState = { ...showModal, [target]: true };
-      return newModalState;
-    });
-  };
-
-  const closeModal = (target) => {
-    setShowModal((showModal) => {
-      const newModalState = { ...showModal, [target]: false };
-      return newModalState;
-    });
-  };
-
   //우리의 일기 추가
   const handleMakeOurMemories = (selectedFriendsAndMe, diaryTitle) => {
-    closeModal('invite');
+    console.log('일기추가');
+    setShowModal(closeModal('invite', showModal));
     const date = Date.now();
     diaryRepository.createOurDiary(date, selectedFriendsAndMe);
     selectedFriendsAndMe.forEach((user) => {
@@ -90,6 +83,7 @@ const OurRecord = ({ userRepository, diaryRepository }) => {
 
   //우리의 일기 삭제
   const handleDeleteOurMemories = () => {
+    console.log('일기삭제');
     const newMyMemoryList = { ...myMemoryList };
     delete newMyMemoryList[selectDiary];
     setMyMemoryList(newMyMemoryList);
@@ -107,7 +101,7 @@ const OurRecord = ({ userRepository, diaryRepository }) => {
       newMyMemoryList,
       newMemberList
     );
-    closeModal('ourCalendar');
+    setShowModal(closeAllModal(['delete', 'ourCalendar'], showModal));
   };
   const wallpaperIcon = [
     {
@@ -119,36 +113,60 @@ const OurRecord = ({ userRepository, diaryRepository }) => {
     {
       name: '일기장 만들기',
       src: '/images/inviteIcon.svg',
-      onClick: () => openModal('invite'),
+      onClick: () => setShowModal(openModal('invite', showModal)),
     },
   ];
 
   return (
-    <section id='ourRecord'>
-      <div className={styles.ourRecord}>
-        <WallpaperIcon wallpaperIcon={wallpaperIcon} location={'left'} />
-        {showModal.invite && (
-          <InviteModal
-            userRepository={userRepository}
-            me={user}
-            onClose={closeModal}
-            onMakeOurMemories={handleMakeOurMemories}
-          />
-        )}
-        {showModal.ourCalendar && (
-          <CalendarFrame
-            memories={ourMemories}
-            user={user}
-            selectDiary={selectDiary}
-            onClose={closeModal}
-            onDeleteOurMemories={handleDeleteOurMemories}
-          />
-        )}
-        {ourDiaryIcon && (
-          <WallpaperIcon wallpaperIcon={ourDiaryIcon} location={'right'} />
-        )}
-      </div>
-    </section>
+    <>
+      <section id='ourRecord'>
+        <div className={styles.ourRecord}>
+          <div
+            className={`${
+              (showModal.invite || showModal.ourCalendar) && styles.hide
+            }`}
+          >
+            <WallpaperIcon wallpaperIcon={wallpaperIcon} location={'left'} />
+          </div>
+          {showModal.invite && (
+            <InviteModal
+              userRepository={userRepository}
+              me={user}
+              showModal={showModal}
+              setShowModal={setShowModal}
+              onMakeOurMemories={handleMakeOurMemories}
+            />
+          )}
+          {showModal.ourCalendar && (
+            <CalendarFrame
+              memories={ourMemories}
+              user={user}
+              showModal={showModal}
+              setShowModal={setShowModal}
+              selectDiary={selectDiary}
+            />
+          )}
+          <div
+            className={`${
+              (showModal.invite || showModal.ourCalendar) && styles.hide
+            }`}
+          >
+            {ourDiaryIcon && (
+              <WallpaperIcon wallpaperIcon={ourDiaryIcon} location={'right'} />
+            )}
+          </div>
+        </div>
+      </section>
+      {showModal.delete && (
+        <ConfirmModal
+          message='정말 우리의 일기를 지울건가요? :('
+          onCancel={() => {
+            setShowModal(closeModal('delete', showModal));
+          }}
+          onConfirm={handleDeleteOurMemories}
+        />
+      )}
+    </>
   );
 };
 

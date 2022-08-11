@@ -9,7 +9,7 @@ import {
   faSnowflake,
 } from '@fortawesome/free-solid-svg-icons';
 
-const Weather = ({ weather, onChange }) => {
+const Weather = React.memo(({ weather, onChange }) => {
   return (
     <>
       <input
@@ -74,6 +74,6 @@ const Weather = ({ weather, onChange }) => {
       </label>
     </>
   );
-};
+});
 
 export default Weather;

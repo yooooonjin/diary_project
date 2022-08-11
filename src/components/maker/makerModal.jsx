@@ -4,8 +4,16 @@ import ImageUpload from '../imageUpload/imageUpload';
 import Weather from '../weather/weather';
 import Button from '../button/button';
 import XButton from '../xButton/xButton';
+import { closeModal } from '../../service/modalController';
 
-const MakerModal = ({ memory, updateContent, day, fileUpload, onClose }) => {
+const MakerModal = ({
+  memory,
+  updateContent,
+  day,
+  fileUpload,
+  showModal,
+  setShowModal,
+}) => {
   const {
     weather,
     location,
@@ -91,7 +99,6 @@ const MakerModal = ({ memory, updateContent, day, fileUpload, onClose }) => {
   const onMouseUp = () => {
     setIsMoving(false);
   };
-  /////////////////////////////////////////////////
   return (
     <div className={styles.makerModalWrap}>
       <div
@@ -110,7 +117,7 @@ const MakerModal = ({ memory, updateContent, day, fileUpload, onClose }) => {
           <p className={styles.markTitle}>오늘의 일기</p>
           <XButton
             onClick={() => {
-              onClose('edit');
+              setShowModal(closeModal('edit', showModal));
             }}
             version={'beige'}
           />
@@ -215,13 +222,14 @@ const MakerModal = ({ memory, updateContent, day, fileUpload, onClose }) => {
             <Button
               message='확인'
               onClick={() => {
-                onClose('edit');
+                setShowModal(closeModal('edit', showModal));
               }}
               version='dark'
               type='submit'
+              size='0.8em'
             />
           </div>
-          <p className={styles.guide}>
+          <p className={`${styles.guide} ${styles.hide}`}>
             창을 드래그 하여 위치를 이동할 수 있습니다.
           </p>
         </div>

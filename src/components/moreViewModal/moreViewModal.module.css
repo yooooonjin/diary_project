@@ -8,7 +8,7 @@
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  z-index: 30;
+  z-index: 20;
 
   background-color: makerDark;
   border: 3px solid makerDark;

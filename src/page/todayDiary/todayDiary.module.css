@@ -13,16 +13,22 @@
   flex-direction: column;
   justify-content: center;
 }
+.pcHide {
+  display: none;
+}
 
 @media screen and (max-width: mediaQuery) {
   .todayDiary {
     padding: 0 1em;
   }
   .diaryWrap {
-    min-width: 23.5em;
+    min-width: 10em;
     width: 100%;
   }
   .hide {
     display: none;
+  }
+  .pcHide {
+    display: block;
   }
 }

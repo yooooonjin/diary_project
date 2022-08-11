@@ -8,6 +8,7 @@
   border-radius: 2em;
   box-shadow: 6px 6px 0px 0px makerDark;
   color: makerDark;
+  z-index: 10;
 }
 .diary_mark {
   position: relative;
@@ -82,6 +83,7 @@
   max-width: 25em;
   height: 100%;
   object-fit: contain;
+  background-color: makerDark;
 }
 .contentsBox {
   width: 100%;
@@ -123,10 +125,13 @@
   display: flex;
   margin-left: auto;
 }
+.pcHide {
+  display: none;
+}
 
 @media screen and (max-width: mediaQuery) {
   .diary {
-    min-width: 23.5em;
+    min-width: 10em;
     width: 100%;
   }
   .wrap {
@@ -152,5 +157,13 @@
   }
   .evaluation {
     font-size: 0.8rem;
+  }
+  .hide {
+    display: none;
+  }
+  .pcHide {
+    display: block;
+    display: flex;
+    align-items: center;
   }
 }

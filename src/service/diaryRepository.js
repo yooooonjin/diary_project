@@ -32,6 +32,10 @@ class DiaryRepository {
     set(ref(this.db, `ourDiary/${diaryId}/${day}/${userId}`), memory);
   };
 
+  deleteMyDiaryInOurs = (diaryId, userId, day) => {
+    remove(ref(this.db, `ourDiary/${diaryId}/${day}/${userId}`));
+  };
+
   deleteOurDiary = (diaryId, userId, diaryList, memberList) => {
     set(ref(this.db, `myList/${userId}`), diaryList);
     set(ref(this.db, `ourDiary/${diaryId}/member`), memberList);

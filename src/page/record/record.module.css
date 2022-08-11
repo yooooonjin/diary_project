@@ -8,9 +8,17 @@
   display: flex;
   flex-direction: column;
 }
-
+.pcHide {
+  display: none;
+}
 @media screen and (max-width: mediaQuery) {
   .record {
     padding: 0 1em;
+  }
+  .hide {
+    display: none;
+  }
+  .pcHide {
+    display: block;
   }
 }

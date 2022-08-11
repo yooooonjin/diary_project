@@ -21,8 +21,15 @@
 @media screen and (max-width: mediaQuery) {
   .table {
     margin: 6vh auto;
+    table-layout: fixed;
+    width: 100%;
   }
   .td {
-    padding: 0;
+    width: 100%;
+    padding: 0 1px;
+  }
+  .today {
+    border-radius: 0;
+    background-color: transparent;
   }
 }
