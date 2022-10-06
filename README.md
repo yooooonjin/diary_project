@@ -25,7 +25,7 @@
 ## 주요기능 📖
 #### 회원가입과 로그인
 + firebase Authentication를 이용한 회원가입과 로그인입니다.
-<img src="https://user-images.githubusercontent.com/88491427/194217508-7d0c3529-294d-4d36-b7ee-4d6468d970bc.gif">
+<img src="https://user-images.githubusercontent.com/88491427/194232794-4b419cbc-cb0b-43bd-9634-7f57255f3cc1.gif">
 
 #### 나만의 일기 👩
 + 나 혼자 작성하는 일기장입니다.
