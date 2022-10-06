@@ -21,5 +21,9 @@
 ## 주요기능
 **회원가입과 로그인**
 + firebase Authentication를 이용한 회원가입과 로그인
+<img src="https://user-images.githubusercontent.com/88491427/194217508-7d0c3529-294d-4d36-b7ee-4d6468d970bc.gif" width="800">
 
-<img src="https://user-images.githubusercontent.com/88491427/194214713-9e834f0f-d8e1-47f9-8f4d-49a2f9b4fb59.mp4L">
+**나만의 일기**
++ 나 혼자 작성하는 일기장입니다.
++ 달력에서 원하는 날짜를 클릭하면( 오늘날짜는 분홍색 마크 ) 일기를 작성할 수 있습니다.
++ 달력에서 보여지는 메인 이미지와 사진첩에서 볼 수 있는 이미지를 업로드 합니다.
