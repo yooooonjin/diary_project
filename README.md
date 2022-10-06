@@ -1,5 +1,6 @@
 # Record Of Memories 🎞
 **나의 오늘을 기록하고 친구와 함께 공유하는 일기장입니다.**  
+
 어린 시절 교환 일기를 작성한 기억이 있으신가요?  
 자물쇠로 꽁꽁 잠궈 비밀 이야기를 했던 그때를 추억하며  
 성인이 된 지금 친구들과 Record of memories에서 소중한 하루를 기록해보세요 :)
@@ -38,4 +39,6 @@
 <img src="https://user-images.githubusercontent.com/88491427/194225747-36d07df5-2e94-4848-9464-f2a24098acbe.gif">
 
 #### 반응형
+<img src="https://user-images.githubusercontent.com/88491427/194230669-b12ea749-4eec-4404-b8d1-cd9b7a1959e5.gif">
+
 
