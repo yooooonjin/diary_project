@@ -12,3 +12,12 @@
 	<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=CSS3&logoColor=white" />
 	<img src="https://img.shields.io/badge/PostCSS-FF6C37?style=flat&logo=PostCSS&logoColor=white" />
 </div>
+
+#### utilities
+<div align="left">
+	<img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=Firebase&logoColor=white" />
+</div>
+
+## 주요기능
+**회원가입과 로그인**
++ firebase Authentication를 이용한 회원가입과 로그인
