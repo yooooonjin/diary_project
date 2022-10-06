@@ -21,3 +21,5 @@
 ## 주요기능
 **회원가입과 로그인**
 + firebase Authentication를 이용한 회원가입과 로그인
+
+<img src="https://user-images.githubusercontent.com/88491427/194214713-9e834f0f-d8e1-47f9-8f4d-49a2f9b4fb59.mp4L">
